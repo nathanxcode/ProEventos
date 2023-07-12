@@ -1,8 +1,41 @@
+<h2>Eventos</h2>
+<hr>
 
-<div *ngFor="let evento of eventos">
-
-    <p><b>Tema:</b>{{evento.name}}</p>
-    <p><b>Palestrante:</b>{{evento.palestrante}}</p>
-
-    <hr>
+<div class="form-inline">
+    <div class="form-group mb-2">
+        <label class="mr-4">Filtro: </label>
+        <input type="text" class="form-control mr-2" placeholder="buscar" [(ngModel)]="filterList" >
+    </div>
 </div>
+<h3>Filtro: {{filterList}}</h3>
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tema</th>
+            <th>Palestrante</th>
+            <th>Capacidade</th>
+            <th>Opções</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let evento of filtedEvents">
+            <td>{{evento.eventoId}}</td>
+            <td>{{evento.name}}</td>
+            <td>{{evento.palestrante}}</td>
+            <td>{{evento.capacidadeEvento}}</td>
+            <td>
+                <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm mr-2">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot *ngIf="!eventos.length">
+        <tr>
+            <td colspan="4" class="text-center">
+                <h4>Nenhum evento encontrado!</h4>
+            </td>
+        </tr>
+    </tfoot>
+</table>
